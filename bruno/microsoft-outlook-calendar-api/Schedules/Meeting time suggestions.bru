@@ -1,0 +1,359 @@
+meta {
+  name: Meeting time suggestions
+  type: http
+  seq: 2
+  tags: [
+    Schedules
+  ]
+}
+
+post {
+  url: {{baseUrl}}/me/findMeetingTimes
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "attendees": [
+      {
+        "emailAddress": {
+          "name": "",
+          "address": ""
+        },
+        "type": "required"
+      }
+    ],
+    "timeConstraint": {
+      "timeslots": [
+        {
+          "start": {
+            "dateTime": "",
+            "timeZone": ""
+          },
+          "end": {}
+        }
+      ]
+    },
+    "locationConstraint": {
+      "isRequired": false,
+      "suggestLocation": false,
+      "locations": [
+        {
+          "displayName": "",
+          "address": {
+            "street": "",
+            "city": "",
+            "state": "",
+            "countryOrRegion": "",
+            "postalCode": ""
+          }
+        }
+      ]
+    },
+    "meetingDuration": "",
+    "maxCandidates": 0,
+    "isOrganizerOptional": false,
+    "minimumAttendeePercentage": 0
+  }
+}
+
+example {
+  name: Suggested meeting times
+  
+  request: {
+    url: {{baseUrl}}/me/findMeetingTimes
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "attendees": [
+          {
+            "emailAddress": {
+              "name": "",
+              "address": ""
+            },
+            "type": "required"
+          }
+        ],
+        "timeConstraint": {
+          "timeslots": [
+            {
+              "start": {
+                "dateTime": "",
+                "timeZone": ""
+              },
+              "end": {}
+            }
+          ]
+        },
+        "locationConstraint": {
+          "isRequired": false,
+          "suggestLocation": false,
+          "locations": [
+            {
+              "displayName": "",
+              "address": {
+                "street": "",
+                "city": "",
+                "state": "",
+                "countryOrRegion": "",
+                "postalCode": ""
+              }
+            }
+          ]
+        },
+        "meetingDuration": "",
+        "maxCandidates": 0,
+        "isOrganizerOptional": false,
+        "minimumAttendeePercentage": 0
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "meetingTimeSuggestions": [
+            {
+              "confidence": 100,
+              "meetingTimeSlot": {
+                "start": {
+                  "dateTime": "2025-06-17T10:00:00.0000000",
+                  "timeZone": "UTC"
+                },
+                "end": {
+                  "dateTime": "2025-06-17T11:00:00.0000000",
+                  "timeZone": "UTC"
+                }
+              },
+              "organizerAvailability": "free",
+              "attendeeAvailability": [
+                {
+                  "attendee": {
+                    "emailAddress": {
+                      "name": "Megan Bowen",
+                      "address": "meganb@contoso.com"
+                    },
+                    "type": "required"
+                  },
+                  "availability": "free"
+                }
+              ],
+              "locations": [
+                {
+                  "displayName": "Conference Room A"
+                }
+              ]
+            },
+            {
+              "confidence": 75,
+              "meetingTimeSlot": {
+                "start": {
+                  "dateTime": "2025-06-17T14:00:00.0000000",
+                  "timeZone": "UTC"
+                },
+                "end": {
+                  "dateTime": "2025-06-17T15:00:00.0000000",
+                  "timeZone": "UTC"
+                }
+              },
+              "organizerAvailability": "free",
+              "attendeeAvailability": [
+                {
+                  "attendee": {
+                    "emailAddress": {
+                      "name": "Megan Bowen",
+                      "address": "meganb@contoso.com"
+                    },
+                    "type": "required"
+                  },
+                  "availability": "tentative"
+                }
+              ],
+              "locations": [
+                {
+                  "displayName": "Conference Room B"
+                }
+              ]
+            }
+          ],
+          "emptySuggestionsReason": ""
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Bad request error
+  
+  request: {
+    url: {{baseUrl}}/me/findMeetingTimes
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "attendees": [
+          {
+            "emailAddress": {
+              "name": "",
+              "address": ""
+            },
+            "type": "required"
+          }
+        ],
+        "timeConstraint": {
+          "timeslots": [
+            {
+              "start": {
+                "dateTime": "",
+                "timeZone": ""
+              },
+              "end": {}
+            }
+          ]
+        },
+        "locationConstraint": {
+          "isRequired": false,
+          "suggestLocation": false,
+          "locations": [
+            {
+              "displayName": "",
+              "address": {
+                "street": "",
+                "city": "",
+                "state": "",
+                "countryOrRegion": "",
+                "postalCode": ""
+              }
+            }
+          ]
+        },
+        "meetingDuration": "",
+        "maxCandidates": 0,
+        "isOrganizerOptional": false,
+        "minimumAttendeePercentage": 0
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "BadRequest",
+            "message": "The request is invalid. Check the request body and parameters.",
+            "innerError": {
+              "request-id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized error
+  
+  request: {
+    url: {{baseUrl}}/me/findMeetingTimes
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "attendees": [
+          {
+            "emailAddress": {
+              "name": "",
+              "address": ""
+            },
+            "type": "required"
+          }
+        ],
+        "timeConstraint": {
+          "timeslots": [
+            {
+              "start": {
+                "dateTime": "",
+                "timeZone": ""
+              },
+              "end": {}
+            }
+          ]
+        },
+        "locationConstraint": {
+          "isRequired": false,
+          "suggestLocation": false,
+          "locations": [
+            {
+              "displayName": "",
+              "address": {
+                "street": "",
+                "city": "",
+                "state": "",
+                "countryOrRegion": "",
+                "postalCode": ""
+              }
+            }
+          ]
+        },
+        "meetingDuration": "",
+        "maxCandidates": 0,
+        "isOrganizerOptional": false,
+        "minimumAttendeePercentage": 0
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "InvalidAuthenticationToken",
+            "message": "Access token is empty or invalid.",
+            "innerError": {
+              "request-id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

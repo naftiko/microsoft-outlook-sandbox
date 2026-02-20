@@ -1,0 +1,486 @@
+meta {
+  name: Create event in a calendar
+  type: http
+  seq: 2
+  tags: [
+    Events
+  ]
+}
+
+post {
+  url: {{baseUrl}}/me/calendars/:calendarId/events
+  body: json
+  auth: inherit
+}
+
+params:path {
+  calendarId: AAMkAGI2AAAt4AHjAAA=
+}
+
+body:json {
+  {
+    "subject": "",
+    "body": {
+      "contentType": "text",
+      "content": ""
+    },
+    "start": {
+      "dateTime": "",
+      "timeZone": ""
+    },
+    "end": {},
+    "location": {
+      "displayName": "",
+      "address": {
+        "street": "",
+        "city": "",
+        "state": "",
+        "countryOrRegion": "",
+        "postalCode": ""
+      }
+    },
+    "attendees": [
+      {
+        "emailAddress": {
+          "name": "",
+          "address": ""
+        },
+        "type": "required"
+      }
+    ],
+    "isAllDay": false,
+    "isOnlineMeeting": false,
+    "onlineMeetingProvider": "unknown",
+    "recurrence": {
+      "pattern": {
+        "type": "daily",
+        "interval": 0,
+        "daysOfWeek": [
+          "sunday"
+        ]
+      },
+      "range": {
+        "type": "endDate",
+        "startDate": "",
+        "endDate": "",
+        "numberOfOccurrences": 0
+      }
+    },
+    "sensitivity": "normal",
+    "showAs": "free",
+    "importance": "low"
+  }
+}
+
+example {
+  name: A newly created event
+  
+  request: {
+    url: {{baseUrl}}/me/calendars/:calendarId/events
+    method: POST
+    mode: json
+    params:path: {
+      calendarId: 
+    }
+  
+    body:json: {
+      {
+        "subject": "",
+        "body": {
+          "contentType": "text",
+          "content": ""
+        },
+        "start": {
+          "dateTime": "",
+          "timeZone": ""
+        },
+        "end": {},
+        "location": {
+          "displayName": "",
+          "address": {
+            "street": "",
+            "city": "",
+            "state": "",
+            "countryOrRegion": "",
+            "postalCode": ""
+          }
+        },
+        "attendees": [
+          {
+            "emailAddress": {
+              "name": "",
+              "address": ""
+            },
+            "type": "required"
+          }
+        ],
+        "isAllDay": false,
+        "isOnlineMeeting": false,
+        "onlineMeetingProvider": "unknown",
+        "recurrence": {
+          "pattern": {
+            "type": "daily",
+            "interval": 0,
+            "daysOfWeek": [
+              "sunday"
+            ]
+          },
+          "range": {
+            "type": "endDate",
+            "startDate": "",
+            "endDate": "",
+            "numberOfOccurrences": 0
+          }
+        },
+        "sensitivity": "normal",
+        "showAs": "free",
+        "importance": "low"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "AAMkAGI2AAA7xCWAAA=",
+          "subject": "Design Review",
+          "body": {
+            "contentType": "html",
+            "content": "<html><body><p>Review new wireframes</p></body></html>"
+          },
+          "start": {
+            "dateTime": "2025-06-20T13:00:00.0000000",
+            "timeZone": "UTC"
+          },
+          "end": {
+            "dateTime": "2025-06-20T14:00:00.0000000",
+            "timeZone": "UTC"
+          },
+          "location": {
+            "displayName": "Conference Room B"
+          },
+          "attendees": [
+            {
+              "emailAddress": {
+                "name": "Alex Wilber",
+                "address": "alexw@contoso.com"
+              },
+              "type": "required"
+            }
+          ],
+          "isAllDay": false,
+          "isCancelled": false,
+          "isOnlineMeeting": true,
+          "onlineMeetingProvider": "teamsForBusiness",
+          "sensitivity": "normal",
+          "showAs": "busy",
+          "importance": "normal",
+          "organizer": {
+            "emailAddress": {
+              "name": "Adele Vance",
+              "address": "adelev@contoso.com"
+            }
+          },
+          "createdDateTime": "2025-06-14T10:00:00Z",
+          "lastModifiedDateTime": "2025-06-14T10:00:00Z"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Bad request error
+  
+  request: {
+    url: {{baseUrl}}/me/calendars/:calendarId/events
+    method: POST
+    mode: json
+    params:path: {
+      calendarId: 
+    }
+  
+    body:json: {
+      {
+        "subject": "",
+        "body": {
+          "contentType": "text",
+          "content": ""
+        },
+        "start": {
+          "dateTime": "",
+          "timeZone": ""
+        },
+        "end": {},
+        "location": {
+          "displayName": "",
+          "address": {
+            "street": "",
+            "city": "",
+            "state": "",
+            "countryOrRegion": "",
+            "postalCode": ""
+          }
+        },
+        "attendees": [
+          {
+            "emailAddress": {
+              "name": "",
+              "address": ""
+            },
+            "type": "required"
+          }
+        ],
+        "isAllDay": false,
+        "isOnlineMeeting": false,
+        "onlineMeetingProvider": "unknown",
+        "recurrence": {
+          "pattern": {
+            "type": "daily",
+            "interval": 0,
+            "daysOfWeek": [
+              "sunday"
+            ]
+          },
+          "range": {
+            "type": "endDate",
+            "startDate": "",
+            "endDate": "",
+            "numberOfOccurrences": 0
+          }
+        },
+        "sensitivity": "normal",
+        "showAs": "free",
+        "importance": "low"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "BadRequest",
+            "message": "The request is invalid. Check the request body and parameters.",
+            "innerError": {
+              "request-id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized error
+  
+  request: {
+    url: {{baseUrl}}/me/calendars/:calendarId/events
+    method: POST
+    mode: json
+    params:path: {
+      calendarId: 
+    }
+  
+    body:json: {
+      {
+        "subject": "",
+        "body": {
+          "contentType": "text",
+          "content": ""
+        },
+        "start": {
+          "dateTime": "",
+          "timeZone": ""
+        },
+        "end": {},
+        "location": {
+          "displayName": "",
+          "address": {
+            "street": "",
+            "city": "",
+            "state": "",
+            "countryOrRegion": "",
+            "postalCode": ""
+          }
+        },
+        "attendees": [
+          {
+            "emailAddress": {
+              "name": "",
+              "address": ""
+            },
+            "type": "required"
+          }
+        ],
+        "isAllDay": false,
+        "isOnlineMeeting": false,
+        "onlineMeetingProvider": "unknown",
+        "recurrence": {
+          "pattern": {
+            "type": "daily",
+            "interval": 0,
+            "daysOfWeek": [
+              "sunday"
+            ]
+          },
+          "range": {
+            "type": "endDate",
+            "startDate": "",
+            "endDate": "",
+            "numberOfOccurrences": 0
+          }
+        },
+        "sensitivity": "normal",
+        "showAs": "free",
+        "importance": "low"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "InvalidAuthenticationToken",
+            "message": "Access token is empty or invalid.",
+            "innerError": {
+              "request-id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Not found error
+  
+  request: {
+    url: {{baseUrl}}/me/calendars/:calendarId/events
+    method: POST
+    mode: json
+    params:path: {
+      calendarId: 
+    }
+  
+    body:json: {
+      {
+        "subject": "",
+        "body": {
+          "contentType": "text",
+          "content": ""
+        },
+        "start": {
+          "dateTime": "",
+          "timeZone": ""
+        },
+        "end": {},
+        "location": {
+          "displayName": "",
+          "address": {
+            "street": "",
+            "city": "",
+            "state": "",
+            "countryOrRegion": "",
+            "postalCode": ""
+          }
+        },
+        "attendees": [
+          {
+            "emailAddress": {
+              "name": "",
+              "address": ""
+            },
+            "type": "required"
+          }
+        ],
+        "isAllDay": false,
+        "isOnlineMeeting": false,
+        "onlineMeetingProvider": "unknown",
+        "recurrence": {
+          "pattern": {
+            "type": "daily",
+            "interval": 0,
+            "daysOfWeek": [
+              "sunday"
+            ]
+          },
+          "range": {
+            "type": "endDate",
+            "startDate": "",
+            "endDate": "",
+            "numberOfOccurrences": 0
+          }
+        },
+        "sensitivity": "normal",
+        "showAs": "free",
+        "importance": "low"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ResourceNotFound",
+            "message": "The specified resource was not found.",
+            "innerError": {
+              "request-id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

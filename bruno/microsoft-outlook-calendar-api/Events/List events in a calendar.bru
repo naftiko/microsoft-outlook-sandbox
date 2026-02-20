@@ -1,0 +1,207 @@
+meta {
+  name: List events in a calendar
+  type: http
+  seq: 1
+  tags: [
+    Events
+  ]
+}
+
+get {
+  url: {{baseUrl}}/me/calendars/:calendarId/events
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~$top: 
+  ~$skip: 
+  ~$select: 
+  ~$filter: 
+  ~$orderby: 
+}
+
+params:path {
+  calendarId: AAMkAGI2AAAt4AHjAAA=
+}
+
+example {
+  name: Events in a calendar
+  
+  request: {
+    url: {{baseUrl}}/me/calendars/:calendarId/events
+    method: GET
+    mode: none
+    params:query: {
+      ~$top: 
+      ~$skip: 
+      ~$select: 
+      ~$filter: 
+      ~$orderby: 
+    }
+  
+    params:path: {
+      calendarId: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "value": [
+            {
+              "id": "AAMkAGI2AAA7xCUAAA=",
+              "subject": "Team Standup",
+              "body": {
+                "contentType": "html",
+                "content": "<html><body><p>Daily standup meeting</p></body></html>"
+              },
+              "start": {
+                "dateTime": "2025-06-15T09:00:00.0000000",
+                "timeZone": "UTC"
+              },
+              "end": {
+                "dateTime": "2025-06-15T09:30:00.0000000",
+                "timeZone": "UTC"
+              },
+              "location": {
+                "displayName": "Conference Room A"
+              },
+              "attendees": [
+                {
+                  "emailAddress": {
+                    "name": "Megan Bowen",
+                    "address": "meganb@contoso.com"
+                  },
+                  "type": "required"
+                }
+              ],
+              "isAllDay": false,
+              "isCancelled": false,
+              "isOnlineMeeting": true,
+              "onlineMeetingProvider": "teamsForBusiness",
+              "sensitivity": "normal",
+              "showAs": "busy",
+              "importance": "normal",
+              "organizer": {
+                "emailAddress": {
+                  "name": "Adele Vance",
+                  "address": "adelev@contoso.com"
+                }
+              },
+              "createdDateTime": "2025-06-01T12:00:00Z",
+              "lastModifiedDateTime": "2025-06-10T08:30:00Z"
+            }
+          ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized error
+  
+  request: {
+    url: {{baseUrl}}/me/calendars/:calendarId/events
+    method: GET
+    mode: none
+    params:query: {
+      ~$top: 
+      ~$skip: 
+      ~$select: 
+      ~$filter: 
+      ~$orderby: 
+    }
+  
+    params:path: {
+      calendarId: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "InvalidAuthenticationToken",
+            "message": "Access token is empty or invalid.",
+            "innerError": {
+              "request-id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Not found error
+  
+  request: {
+    url: {{baseUrl}}/me/calendars/:calendarId/events
+    method: GET
+    mode: none
+    params:query: {
+      ~$top: 
+      ~$skip: 
+      ~$select: 
+      ~$filter: 
+      ~$orderby: 
+    }
+  
+    params:path: {
+      calendarId: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ResourceNotFound",
+            "message": "The specified resource was not found.",
+            "innerError": {
+              "request-id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

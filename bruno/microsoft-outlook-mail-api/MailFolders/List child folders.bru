@@ -1,0 +1,129 @@
+meta {
+  name: List child folders
+  type: http
+  seq: 7
+  tags: [
+    MailFolders
+  ]
+}
+
+get {
+  url: {{baseUrl}}/me/mailFolders/:mailFolder-id/childFolders
+  body: none
+  auth: inherit
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/mailFolders/:mailFolder-id/childFolders
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('user-id')/mailFolders",
+          "value": [
+            {
+              "id": "AAMkAGI1AAAEJAAA=",
+              "displayName": "Inbox",
+              "parentFolderId": "AAMkAGI1AAAAAA=",
+              "childFolderCount": 2,
+              "totalItemCount": 147,
+              "unreadItemCount": 12,
+              "isHidden": false
+            }
+          ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/mailFolders/:mailFolder-id/childFolders
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: NotFound
+  
+  request: {
+    url: {{baseUrl}}/me/mailFolders/:mailFolder-id/childFolders
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorItemNotFound",
+            "message": "The specified object was not found in the store.",
+            "innerError": {
+              "request-id": "c3d4e5f6-a7b8-9012-cdef-3456789012ab",
+              "date": "2024-01-15T10:31:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

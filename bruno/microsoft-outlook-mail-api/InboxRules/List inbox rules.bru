@@ -1,0 +1,112 @@
+meta {
+  name: List inbox rules
+  type: http
+  seq: 1
+  tags: [
+    InboxRules
+  ]
+}
+
+get {
+  url: {{baseUrl}}/me/mailFolders/inbox/messageRules
+  body: none
+  auth: inherit
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/mailFolders/inbox/messageRules
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "value": [
+            {
+              "id": "AQAAAJ5dZqA=",
+              "displayName": "Forward from manager",
+              "sequence": 1,
+              "isEnabled": true,
+              "isReadOnly": false,
+              "hasError": false,
+              "conditions": {
+                "fromAddresses": [
+                  {
+                    "emailAddress": {
+                      "name": "Manager",
+                      "address": "manager@contoso.com"
+                    }
+                  }
+                ]
+              },
+              "exceptions": {},
+              "actions": {
+                "forwardTo": [
+                  {
+                    "emailAddress": {
+                      "name": "Archive",
+                      "address": "archive@contoso.com"
+                    }
+                  }
+                ],
+                "stopProcessingRules": true
+              }
+            }
+          ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/mailFolders/inbox/messageRules
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

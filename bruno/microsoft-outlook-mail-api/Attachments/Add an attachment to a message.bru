@@ -1,0 +1,172 @@
+meta {
+  name: Add an attachment to a message
+  type: http
+  seq: 2
+  tags: [
+    Attachments
+  ]
+}
+
+post {
+  url: {{baseUrl}}/me/messages/:message-id/attachments
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "@odata.type": "",
+    "id": "",
+    "name": "",
+    "contentType": "",
+    "size": 0,
+    "isInline": false,
+    "lastModifiedDateTime": ""
+  }
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/messages/:message-id/attachments
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "@odata.type": "",
+        "id": "",
+        "name": "",
+        "contentType": "",
+        "size": 0,
+        "isInline": false,
+        "lastModifiedDateTime": ""
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "@odata.type": "#microsoft.graph.fileAttachment",
+          "id": "AAMkAGI1AAABEgAQAA==",
+          "name": "report.pdf",
+          "contentType": "application/pdf",
+          "size": 35684,
+          "isInline": false,
+          "lastModifiedDateTime": "2024-01-15T10:30:00Z",
+          "contentBytes": "SGVsbG8gV29ybGQ=",
+          "contentId": null,
+          "contentLocation": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/messages/:message-id/attachments
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "@odata.type": "",
+        "id": "",
+        "name": "",
+        "contentType": "",
+        "size": 0,
+        "isInline": false,
+        "lastModifiedDateTime": ""
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: NotFound
+  
+  request: {
+    url: {{baseUrl}}/me/messages/:message-id/attachments
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "@odata.type": "",
+        "id": "",
+        "name": "",
+        "contentType": "",
+        "size": 0,
+        "isInline": false,
+        "lastModifiedDateTime": ""
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorItemNotFound",
+            "message": "The specified object was not found in the store.",
+            "innerError": {
+              "request-id": "c3d4e5f6-a7b8-9012-cdef-3456789012ab",
+              "date": "2024-01-15T10:31:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

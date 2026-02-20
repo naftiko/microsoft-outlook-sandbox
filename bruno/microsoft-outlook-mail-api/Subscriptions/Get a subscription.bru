@@ -1,0 +1,124 @@
+meta {
+  name: Get a subscription
+  type: http
+  seq: 3
+  tags: [
+    Subscriptions
+  ]
+}
+
+get {
+  url: {{baseUrl}}/subscriptions/:subscription-id
+  body: none
+  auth: inherit
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/subscriptions/:subscription-id
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "7f105c7d-2dc5-4530-97cd-4e7ae6534c07",
+          "resource": "me/mailFolders('Inbox')/messages",
+          "changeType": "created,updated",
+          "clientState": "secretClientValue",
+          "notificationUrl": "https://webhook.contoso.com/api/notifications",
+          "expirationDateTime": "2024-02-15T11:00:00Z",
+          "includeResourceData": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/subscriptions/:subscription-id
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: NotFound
+  
+  request: {
+    url: {{baseUrl}}/subscriptions/:subscription-id
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorItemNotFound",
+            "message": "The specified object was not found in the store.",
+            "innerError": {
+              "request-id": "c3d4e5f6-a7b8-9012-cdef-3456789012ab",
+              "date": "2024-01-15T10:31:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

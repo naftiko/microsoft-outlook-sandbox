@@ -1,0 +1,99 @@
+meta {
+  name: Get supported time zones
+  type: http
+  seq: 2
+  tags: [
+    LocaleAndTimeZone
+  ]
+}
+
+get {
+  url: {{baseUrl}}/me/outlook/supportedTimeZones
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~TimeZoneStandard: windows
+  ~TimeZoneStandard: iana
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/outlook/supportedTimeZones
+    method: GET
+    mode: none
+    params:query: {
+      ~TimeZoneStandard: windows
+      ~TimeZoneStandard: iana
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "value": [
+            {
+              "alias": "Pacific Standard Time",
+              "displayName": "(UTC-08:00) Pacific Time (US & Canada)"
+            }
+          ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/outlook/supportedTimeZones
+    method: GET
+    mode: none
+    params:query: {
+      ~TimeZoneStandard: windows
+      ~TimeZoneStandard: iana
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

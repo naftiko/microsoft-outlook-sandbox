@@ -1,0 +1,165 @@
+meta {
+  name: Get group calendar
+  type: http
+  seq: 1
+  tags: [
+    GroupCalendars
+  ]
+}
+
+get {
+  url: {{baseUrl}}/groups/:groupId/calendar
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~$select: 
+}
+
+params:path {
+  groupId: AAMkAGRmGxhY7EAAA=
+}
+
+example {
+  name: A Microsoft 365 group default calendar
+  
+  request: {
+    url: {{baseUrl}}/groups/:groupId/calendar
+    method: GET
+    mode: none
+    params:query: {
+      ~$select: 
+    }
+  
+    params:path: {
+      groupId: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "AAMkAGRmGxhY7EAAA=",
+          "name": "Calendar",
+          "color": "auto",
+          "hexColor": "",
+          "changeKey": "NEXywgsVrkeNsFsyVyRrtAAAAAACOg==",
+          "canEdit": true,
+          "canShare": false,
+          "canViewPrivateItems": false,
+          "isDefaultCalendar": true,
+          "isRemovable": false,
+          "isTallyingResponses": false,
+          "allowedOnlineMeetingProviders": [
+            "teamsForBusiness"
+          ],
+          "defaultOnlineMeetingProvider": "teamsForBusiness",
+          "owner": {
+            "name": "Engineering Team",
+            "address": "engineering@contoso.com"
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized error
+  
+  request: {
+    url: {{baseUrl}}/groups/:groupId/calendar
+    method: GET
+    mode: none
+    params:query: {
+      ~$select: 
+    }
+  
+    params:path: {
+      groupId: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "InvalidAuthenticationToken",
+            "message": "Access token is empty or invalid.",
+            "innerError": {
+              "request-id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Not found error
+  
+  request: {
+    url: {{baseUrl}}/groups/:groupId/calendar
+    method: GET
+    mode: none
+    params:query: {
+      ~$select: 
+    }
+  
+    params:path: {
+      groupId: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ResourceNotFound",
+            "message": "The specified resource was not found.",
+            "innerError": {
+              "request-id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+              "date": "2025-06-15T10:00:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,90 @@
+meta {
+  name: List Focused Inbox overrides
+  type: http
+  seq: 1
+  tags: [
+    FocusedInbox
+  ]
+}
+
+get {
+  url: {{baseUrl}}/me/inferenceClassification/overrides
+  body: none
+  auth: inherit
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/inferenceClassification/overrides
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "value": [
+            {
+              "id": "abc123",
+              "classifyAs": "focused",
+              "senderEmailAddress": {
+                "name": "Important Sender",
+                "address": "important@contoso.com"
+              }
+            }
+          ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/inferenceClassification/overrides
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

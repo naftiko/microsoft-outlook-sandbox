@@ -1,0 +1,123 @@
+meta {
+  name: Get user's mailbox settings
+  type: http
+  seq: 1
+  tags: [
+    MailboxSettings
+  ]
+}
+
+get {
+  url: {{baseUrl}}/me/mailboxSettings
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~$select: 
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/mailboxSettings
+    method: GET
+    mode: none
+    params:query: {
+      ~$select: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "automaticRepliesSetting": {
+            "status": "scheduled",
+            "externalAudience": "contactsOnly",
+            "externalReplyMessage": "I am currently out of office.",
+            "internalReplyMessage": "I am currently out of office. Back on Monday.",
+            "scheduledStartDateTime": {
+              "dateTime": "2024-01-20T17:00:00",
+              "timeZone": "UTC"
+            },
+            "scheduledEndDateTime": {
+              "dateTime": "2024-01-22T08:00:00",
+              "timeZone": "UTC"
+            }
+          },
+          "language": {
+            "locale": "en-US",
+            "displayName": "English (United States)"
+          },
+          "timeZone": "Pacific Standard Time",
+          "workingHours": {
+            "daysOfWeek": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday"
+            ],
+            "startTime": "08:00:00",
+            "endTime": "17:00:00",
+            "timeZone": {
+              "name": "Pacific Standard Time"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/mailboxSettings
+    method: GET
+    mode: none
+    params:query: {
+      ~$select: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

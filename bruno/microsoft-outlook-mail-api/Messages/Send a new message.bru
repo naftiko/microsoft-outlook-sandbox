@@ -1,0 +1,362 @@
+meta {
+  name: Send a new message
+  type: http
+  seq: 9
+  tags: [
+    Messages
+  ]
+}
+
+post {
+  url: {{baseUrl}}/me/sendMail
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "message": {
+      "id": "",
+      "createdDateTime": "",
+      "lastModifiedDateTime": "",
+      "receivedDateTime": "",
+      "sentDateTime": "",
+      "subject": "",
+      "body": {
+        "contentType": "text",
+        "content": ""
+      },
+      "bodyPreview": "",
+      "importance": "low",
+      "inferenceClassification": "focused",
+      "isDeliveryReceiptRequested": false,
+      "isReadReceiptRequested": false,
+      "isRead": false,
+      "isDraft": false,
+      "hasAttachments": false,
+      "conversationId": "",
+      "conversationIndex": "",
+      "internetMessageId": "",
+      "internetMessageHeaders": [
+        {
+          "name": "",
+          "value": ""
+        }
+      ],
+      "webLink": "",
+      "parentFolderId": "",
+      "categories": [],
+      "flag": {
+        "flagStatus": "notFlagged",
+        "completedDateTime": {
+          "dateTime": "",
+          "timeZone": ""
+        },
+        "dueDateTime": {},
+        "startDateTime": {}
+      },
+      "from": "",
+      "sender": "",
+      "toRecipients": [
+        {
+          "emailAddress": {
+            "name": "",
+            "address": ""
+          }
+        }
+      ],
+      "ccRecipients": [
+        {}
+      ],
+      "bccRecipients": [
+        {}
+      ],
+      "replyTo": [
+        {}
+      ],
+      "attachments": [
+        {
+          "@odata.type": "",
+          "id": "",
+          "name": "",
+          "contentType": "",
+          "size": 0,
+          "isInline": false,
+          "lastModifiedDateTime": ""
+        }
+      ],
+      "extensions": [
+        {
+          "id": "",
+          "@odata.type": ""
+        }
+      ],
+      "singleValueExtendedProperties": [
+        {
+          "id": "",
+          "value": ""
+        }
+      ],
+      "multiValueExtendedProperties": [
+        {
+          "id": "",
+          "value": []
+        }
+      ]
+    },
+    "saveToSentItems": false
+  }
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/sendMail
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "message": {
+          "id": "",
+          "createdDateTime": "",
+          "lastModifiedDateTime": "",
+          "receivedDateTime": "",
+          "sentDateTime": "",
+          "subject": "",
+          "body": {
+            "contentType": "text",
+            "content": ""
+          },
+          "bodyPreview": "",
+          "importance": "low",
+          "inferenceClassification": "focused",
+          "isDeliveryReceiptRequested": false,
+          "isReadReceiptRequested": false,
+          "isRead": false,
+          "isDraft": false,
+          "hasAttachments": false,
+          "conversationId": "",
+          "conversationIndex": "",
+          "internetMessageId": "",
+          "internetMessageHeaders": [
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "webLink": "",
+          "parentFolderId": "",
+          "categories": [],
+          "flag": {
+            "flagStatus": "notFlagged",
+            "completedDateTime": {
+              "dateTime": "",
+              "timeZone": ""
+            },
+            "dueDateTime": {},
+            "startDateTime": {}
+          },
+          "from": "",
+          "sender": "",
+          "toRecipients": [
+            {
+              "emailAddress": {
+                "name": "",
+                "address": ""
+              }
+            }
+          ],
+          "ccRecipients": [
+            {}
+          ],
+          "bccRecipients": [
+            {}
+          ],
+          "replyTo": [
+            {}
+          ],
+          "attachments": [
+            {
+              "@odata.type": "",
+              "id": "",
+              "name": "",
+              "contentType": "",
+              "size": 0,
+              "isInline": false,
+              "lastModifiedDateTime": ""
+            }
+          ],
+          "extensions": [
+            {
+              "id": "",
+              "@odata.type": ""
+            }
+          ],
+          "singleValueExtendedProperties": [
+            {
+              "id": "",
+              "value": ""
+            }
+          ],
+          "multiValueExtendedProperties": [
+            {
+              "id": "",
+              "value": []
+            }
+          ]
+        },
+        "saveToSentItems": false
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 202
+      text: Accepted
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {}
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/sendMail
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "message": {
+          "id": "",
+          "createdDateTime": "",
+          "lastModifiedDateTime": "",
+          "receivedDateTime": "",
+          "sentDateTime": "",
+          "subject": "",
+          "body": {
+            "contentType": "text",
+            "content": ""
+          },
+          "bodyPreview": "",
+          "importance": "low",
+          "inferenceClassification": "focused",
+          "isDeliveryReceiptRequested": false,
+          "isReadReceiptRequested": false,
+          "isRead": false,
+          "isDraft": false,
+          "hasAttachments": false,
+          "conversationId": "",
+          "conversationIndex": "",
+          "internetMessageId": "",
+          "internetMessageHeaders": [
+            {
+              "name": "",
+              "value": ""
+            }
+          ],
+          "webLink": "",
+          "parentFolderId": "",
+          "categories": [],
+          "flag": {
+            "flagStatus": "notFlagged",
+            "completedDateTime": {
+              "dateTime": "",
+              "timeZone": ""
+            },
+            "dueDateTime": {},
+            "startDateTime": {}
+          },
+          "from": "",
+          "sender": "",
+          "toRecipients": [
+            {
+              "emailAddress": {
+                "name": "",
+                "address": ""
+              }
+            }
+          ],
+          "ccRecipients": [
+            {}
+          ],
+          "bccRecipients": [
+            {}
+          ],
+          "replyTo": [
+            {}
+          ],
+          "attachments": [
+            {
+              "@odata.type": "",
+              "id": "",
+              "name": "",
+              "contentType": "",
+              "size": 0,
+              "isInline": false,
+              "lastModifiedDateTime": ""
+            }
+          ],
+          "extensions": [
+            {
+              "id": "",
+              "@odata.type": ""
+            }
+          ],
+          "singleValueExtendedProperties": [
+            {
+              "id": "",
+              "value": ""
+            }
+          ],
+          "multiValueExtendedProperties": [
+            {
+              "id": "",
+              "value": []
+            }
+          ]
+        },
+        "saveToSentItems": false
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

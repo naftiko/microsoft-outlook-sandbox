@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "microsoft-outlook-mail-api",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

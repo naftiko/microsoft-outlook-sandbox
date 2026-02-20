@@ -1,0 +1,105 @@
+meta {
+  name: Create an Outlook category
+  type: http
+  seq: 2
+  tags: [
+    Categories
+  ]
+}
+
+post {
+  url: {{baseUrl}}/me/outlook/masterCategories
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": "",
+    "displayName": "",
+    "color": "none"
+  }
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/outlook/masterCategories
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "id": "",
+        "displayName": "",
+        "color": "none"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "afc97c36-af15-4e96-bf52-e228c84d4567",
+          "displayName": "Blue Category",
+          "color": "preset7"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/outlook/masterCategories
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "id": "",
+        "displayName": "",
+        "color": "none"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

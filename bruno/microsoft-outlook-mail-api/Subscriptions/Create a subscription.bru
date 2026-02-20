@@ -1,0 +1,130 @@
+meta {
+  name: Create a subscription
+  type: http
+  seq: 2
+  tags: [
+    Subscriptions
+  ]
+}
+
+post {
+  url: {{baseUrl}}/subscriptions
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": "",
+    "resource": "",
+    "changeType": "",
+    "clientState": "",
+    "notificationUrl": "",
+    "expirationDateTime": "",
+    "includeResourceData": false,
+    "encryptionCertificate": "",
+    "encryptionCertificateId": "",
+    "latestSupportedTlsVersion": ""
+  }
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/subscriptions
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "id": "",
+        "resource": "",
+        "changeType": "",
+        "clientState": "",
+        "notificationUrl": "",
+        "expirationDateTime": "",
+        "includeResourceData": false,
+        "encryptionCertificate": "",
+        "encryptionCertificateId": "",
+        "latestSupportedTlsVersion": ""
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "7f105c7d-2dc5-4530-97cd-4e7ae6534c07",
+          "resource": "me/mailFolders('Inbox')/messages",
+          "changeType": "created,updated",
+          "clientState": "secretClientValue",
+          "notificationUrl": "https://webhook.contoso.com/api/notifications",
+          "expirationDateTime": "2024-02-15T11:00:00Z",
+          "includeResourceData": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/subscriptions
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "id": "",
+        "resource": "",
+        "changeType": "",
+        "clientState": "",
+        "notificationUrl": "",
+        "expirationDateTime": "",
+        "includeResourceData": false,
+        "encryptionCertificate": "",
+        "encryptionCertificateId": "",
+        "latestSupportedTlsVersion": ""
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,117 @@
+meta {
+  name: Create a Focused Inbox override
+  type: http
+  seq: 2
+  tags: [
+    FocusedInbox
+  ]
+}
+
+post {
+  url: {{baseUrl}}/me/inferenceClassification/overrides
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": "",
+    "classifyAs": "focused",
+    "senderEmailAddress": {
+      "name": "",
+      "address": ""
+    }
+  }
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/inferenceClassification/overrides
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "id": "",
+        "classifyAs": "focused",
+        "senderEmailAddress": {
+          "name": "",
+          "address": ""
+        }
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 201
+      text: Created
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "id": "abc123",
+          "classifyAs": "focused",
+          "senderEmailAddress": {
+            "name": "Important Sender",
+            "address": "important@contoso.com"
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/inferenceClassification/overrides
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "id": "",
+        "classifyAs": "focused",
+        "senderEmailAddress": {
+          "name": "",
+          "address": ""
+        }
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

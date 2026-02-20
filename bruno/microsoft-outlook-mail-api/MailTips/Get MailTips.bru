@@ -1,0 +1,119 @@
+meta {
+  name: Get MailTips
+  type: http
+  seq: 1
+  tags: [
+    MailTips
+  ]
+}
+
+post {
+  url: {{baseUrl}}/me/getMailTips
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "emailAddresses": [],
+    "mailTipsOptions": "automaticReplies"
+  }
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/getMailTips
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "emailAddresses": [],
+        "mailTipsOptions": "automaticReplies"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "value": [
+            {
+              "emailAddress": {
+                "name": "Megan Bowen",
+                "address": "megan@contoso.com"
+              },
+              "automaticReplies": {
+                "message": "I am out of office until January 22."
+              },
+              "mailboxFull": false,
+              "customMailTip": null,
+              "externalMemberCount": 0,
+              "totalMemberCount": 1,
+              "deliveryRestricted": false,
+              "isModerated": false,
+              "recipientScope": "internal",
+              "recipientSuggestions": [],
+              "maxMessageSize": 37748736
+            }
+          ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/getMailTips
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "emailAddresses": [],
+        "mailTipsOptions": "automaticReplies"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

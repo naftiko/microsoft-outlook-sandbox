@@ -1,0 +1,87 @@
+meta {
+  name: List Outlook categories
+  type: http
+  seq: 1
+  tags: [
+    Categories
+  ]
+}
+
+get {
+  url: {{baseUrl}}/me/outlook/masterCategories
+  body: none
+  auth: inherit
+}
+
+example {
+  name: Default
+  
+  request: {
+    url: {{baseUrl}}/me/outlook/masterCategories
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "value": [
+            {
+              "id": "afc97c36-af15-4e96-bf52-e228c84d4567",
+              "displayName": "Blue Category",
+              "color": "preset7"
+            }
+          ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{baseUrl}}/me/outlook/masterCategories
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "error": {
+            "code": "ErrorAccessDenied",
+            "message": "Access is denied. Check credentials and try again.",
+            "innerError": {
+              "request-id": "b1c2d3e4-f5a6-7890-abcd-1234567890ef",
+              "date": "2024-01-15T10:30:00Z"
+            }
+          }
+        }
+      '''
+    }
+  }
+}

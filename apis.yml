@@ -14,7 +14,7 @@ tags:
   - Microsoft
   - Office
 
-image: https://naftiko.s3.us-east-1.amazonaws.com/naftiko-logo-blue-icon.png
+image: https://naftiko.github.io/docs/images/monogram/monogram_full_color_512.png
 
 created: '2026-02-19'
 modified: '2026-02-19'
@@ -27,6 +27,9 @@ apis:
       name: microsoft-outlook-mail-api
       description: >-
         Works with the calendar portions of the Microsoft Graph API, providing the abilitiy to manage the calendar for a user.
+      humanURL: https://github.com/naftiko/microsoft-outlook-sandbox
+      baseURL: http://localhost:8080/rest/microsoft-outlook-sandbox/1.0.0
+      image: https://naftiko.github.io/docs/images/monogram/monogram_full_color_512.png
       tags:
         - Outlook
         - Mail
@@ -49,6 +52,9 @@ apis:
       name: microsoft-outlook-mail-api
       description: >-
         Works with the mail portions of the Microsoft Graph API, providing the abilitiy to manage the mial for a user.
+      humanURL: https://github.com/naftiko/microsoft-outlook-sandbox
+      baseURL: http://localhost:8080/rest/microsoft-outlook-sandbox/1.0.0
+      image: https://naftiko.github.io/docs/images/monogram/monogram_full_color_512.png
       tags:
         - Outlook
         - Mail
@@ -69,6 +75,264 @@ apis:
 
 common:
 
+  - type: AgentSkill
+    url: skills/list-user-calendars/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-user-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-user-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/patch-user-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-user-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/permanent-delete-user-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-calendar-group-calendars/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-calendar-group-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-group-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/patch-group-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-primary-calendar-view/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-calendar-view-by-calendar/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-calendar-events/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-calendar-event/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-default-calendar-event/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-free-busy-schedule/SKILL.md
+
+  - type: AgentSkill
+    url: skills/find-meeting-time-suggestions/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-calendar-single-value-property/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-calendar-multi-value-property/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-messages/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/reply-to-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/reply-all-to-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/forward-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/send-mail/SKILL.md
+
+  - type: AgentSkill
+    url: skills/send-draft-message/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-message-mime-content/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-attachment-content/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-attachments/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-attachment/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-attachment/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-attachment/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-mail-folders/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-mail-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-mail-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-mail-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-mail-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-mail-folder-messages/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-child-folders/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-child-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/copy-mail-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/move-mail-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-mail-search-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-mail-search-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-mail-search-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-mail-search-folder/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-categories/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-category/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-category/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-category/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-category/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-message-rules/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-message-rule/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-message-rule/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-message-rule/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-message-rule/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-inference-classification-overrides/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-inference-classification-override/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-inference-classification-override/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-inference-classification-override/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-inference-classification-override/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-mailbox-settings/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-mailbox-settings/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-supported-languages/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-supported-time-zones/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-mail-tips/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-subscriptions/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-subscription/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-subscription/SKILL.md
+
+  - type: AgentSkill
+    url: skills/renew-subscription/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-subscription/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-mail-folder-delta/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-message-delta/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-message-trace/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-extensions/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-open-extension/SKILL.md
+
+  - type: AgentSkill
+    url: skills/get-extension/SKILL.md
+
+  - type: AgentSkill
+    url: skills/update-open-extension/SKILL.md
+
+  - type: AgentSkill
+    url: skills/delete-extension/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-single-value-extended-properties/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-single-value-extended-property/SKILL.md
+
+  - type: AgentSkill
+    url: skills/list-multi-value-extended-properties/SKILL.md
+
+  - type: AgentSkill
+    url: skills/create-multi-value-extended-property/SKILL.md
+
   - type: GitHubHttpUrl
     url: https://github.com/naftiko/microsoft-outlook-sandbox
 
@@ -82,6 +346,7 @@ common:
     url: https://github.com/orgs/naftiko/discussions
 
   - type: Standards
+    url: https://github.com/naftiko/microsoft-outlook-sandbox
     data:
 
       - name: APIs.json
@@ -109,6 +374,7 @@ common:
         docUrl: https://docs.usebruno.com/secrets-management/overview
 
   - type: Services
+    url: https://github.com/naftiko/microsoft-outlook-sandbox
     data:
 
       - aid: microsoft-graph

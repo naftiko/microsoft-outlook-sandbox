@@ -1,0 +1,21 @@
+naftiko: "1.0.0-alpha2"
+consumes:
+  - namespace: microsoft-outlook-calendar-api
+    type: http
+    baseUri: "https://mocks.naftiko.net/rest/microsoft-outlook-calendar-api/1.0.0"
+    resources:
+      - name: get-group-calendar
+        path: "/groups/{{groupId}}/calendar"
+        operations:
+          - name: get-group-calendar
+            method: GET
+      - name: get-user-calendar
+        path: "/me/calendars/{{calendarId}}"
+        operations:
+          - name: get-user-calendar
+            method: GET
+      - name: list-calendar-events
+        path: "/me/calendars/{{calendarId}}/events"
+        operations:
+          - name: list-calendar-events
+            method: GET
